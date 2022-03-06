@@ -10,15 +10,21 @@ namespace QuotesService.Controllers
         [HttpPost]
         public IActionResult Create(Quote quote)
         {
-            return new OkObjectResult("royale with cheese");
+            try
+            {
+                return new OkObjectResult("royale with cheese");
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
         }
 
         [HttpGet]
-        [Route("{id:Guid?}")]
+        [Route("{id?}")]
         public IActionResult Read(Guid? id = null)
         {
             return new OkObjectResult("royale with cheese");
-
         }
 
         [HttpPut]
