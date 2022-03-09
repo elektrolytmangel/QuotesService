@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace QuotesService.UnitTests
 {
+    [TestFixture]
     public class QuotesHandlerTests
     {
         [Test]
