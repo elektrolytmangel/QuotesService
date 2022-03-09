@@ -22,6 +22,8 @@ namespace QuotesService.UnitTests
             // arrange
             Assert.That(result.Count, Is.EqualTo(1));
         }
+
+        // ToDo: Add as many tests as you think is needed to test the class "QuotesRandomizer"
         
         private IList<Quote> GetQuotes()
         {
