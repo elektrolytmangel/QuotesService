@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuotesService.BusinessLogicLayer;
 using QuotesService.Model;
 
 namespace QuotesService.Controllers
@@ -12,34 +13,79 @@ namespace QuotesService.Controllers
         {
             try
             {
-                return new OkObjectResult("royale with cheese");
+                quote.Id = Guid.Empty;
+                var handler = new QuotesHandler();
+                var result = handler.AddOrUpdate(quote);
+                return new OkObjectResult(result);
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 throw;
             }
         }
 
         [HttpGet]
-        [Route("{id?}")]
-        public IActionResult Read(Guid? id = null)
+        [Route("{id}")]
+        public IActionResult Read(Guid id)
         {
-            return new OkObjectResult("royale with cheese");
+            try
+            {
+                var handler = new QuotesHandler();
+                var result = handler.Get(id);
+                return new OkObjectResult(result);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ReadAll()
+        {
+            try
+            {
+                var handler = new QuotesHandler();
+                var result = handler.Get(Guid.Empty);
+                return new OkObjectResult(result);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpPut]
         [Route("{id}")]
         public IActionResult Update(Guid id, Quote quote)
         {
-            return new OkObjectResult("royale with cheese");
-
+            try
+            {
+                var handler = new QuotesHandler();
+                quote.Id = id;
+                var result = handler.AddOrUpdate(quote);
+                return new OkObjectResult(result);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpDelete]
         [Route("{id}")]
         public IActionResult Delete(Guid id)
         {
-            return new OkObjectResult("royale with cheese");
+            try
+            {
+                var handler = new QuotesHandler();
+                var result = handler.DeleteQuote(id);
+                return new OkObjectResult(result);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
