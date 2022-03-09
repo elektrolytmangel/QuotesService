@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace QuotesService.UnitTests
 {
+    /// <summary>
+    /// Class for Exercise 2 
+    /// </summary>
     [TestFixture]
     public class QuotesRandomizerTests
     {
@@ -24,7 +27,25 @@ namespace QuotesService.UnitTests
         }
 
         // ToDo: Add as many tests as you think is needed to test the class "QuotesRandomizer"
-        
+
+        [Test]
+        public void SelectRandom_CountIs3_ShouldReturn3Quotes()
+        {
+            Assert.Pass();           
+        }
+
+        [Test]
+        public void SelectRandom_CountIs14_ShouldReturn_HowManyQuotes_Quotes()
+        {
+            Assert.Pass();
+        }
+
+        [Test]
+        public void SelectRandom_CountIs0_ShouldThrow_What()
+        {
+            Assert.Pass();
+        }
+
         private IList<Quote> GetQuotes()
         {
             return new List<Quote>

@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace QuotesService.UnitTests
 {
+    /// <summary>
+    /// Class for Exercise 1 
+    /// </summary>
     [TestFixture]
     public class QuotesHandlerTests
     {
@@ -80,6 +83,30 @@ namespace QuotesService.UnitTests
             // ToDo: 
             // 1. Execute the action: QuotesHandler.DeleteQuote
             // 2. Wrap it into your expected Assert: Assert.DoesNotThrow(() => YourDelete-Action);
+
+            // ToDo: Execute the test
+        }
+
+        [Test]
+        public void AddOrUpdate_UpdateQuote_ShouldUpdateQuote()
+        {
+            // ToDo: add test to check if quote can be added
+            // arrange
+            // ToDo:
+            // 1. instantiate QuotesHandler
+            // 2. prepare list of Quote with one quote and give an id which you know: https://guidgenerator.com/
+            // 3. perpare a Quote which has some changed properties
+
+            // act
+            // ToDo: 
+            // 1. Execute the action: QuotesHandler.AddOrUpdate
+
+            // assert
+            // ToDo:
+            // 1. Assert that the result of the action is not null
+            // 2. Assert that the result of the action has an id which is not empty
+            // 3. Assert that the result of the action has its properties changed
+            // 4. Assert that the result is also updated in the list of Quotes
 
             // ToDo: Execute the test
         }

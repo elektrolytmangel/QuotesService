@@ -38,9 +38,9 @@ namespace QuotesService.BusinessLogicLayer
             }
             else if (count % 7 == 0)
             {
-                if ((count * 5) > quotesForSelection.Count)
+                if ((count * 2) > quotesForSelection.Count)
                 {
-                    throw new ArgumentException($"{nameof(count)} with value of {count} must be 5-times bigger than the count of the available quotes({quotesForSelection.Count}). It is not.");
+                    throw new ArgumentException($"{nameof(count)} with value of {count} must be 2-times bigger than the count of the available quotes({quotesForSelection.Count}). It is not.");
                 }
 
                 for (int i = 0; i < count; i += 2)
