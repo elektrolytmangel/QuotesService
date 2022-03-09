@@ -12,3 +12,17 @@ This project contains all information, code and examples to complete the unit-te
 * Open the project of your choice (.Net 6 or .Net Framework) in your code editor (if you are using Visual Studio Code, it is recommended to use .Net 6 Examples)
 * Restore nugets and build project
 * You are ready to go.
+
+# Coverage reports
+To create coverage reports, open powershell in the "QuotesService" directory and execute the lines above.
+``` ps
+dotnet test --collect:"XPlat Code Coverage"
+
+$dir = ".\QuotesService.UnitTests\TestResults"
+$latest = Get-ChildItem -Path $dir | Sort-Object LastAccessTime -Descending | Select-Object -First 1
+Copy-Item $dir\$latest\coverage.cobertura.xml -Destination .\
+
+dotnet $env:USERPROFILE\.nuget\packages\reportgenerator\5.0.4\tools\net6.0\ReportGenerator.dll "-reports:coverage.cobertura.xml" "-targetdir:.\report"
+
+Start-Process .\report\index.html
+```
