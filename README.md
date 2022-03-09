@@ -9,7 +9,7 @@ This project contains all information, code and examples to complete the unit-te
 
 # Getting started
 * Clone this repo to your local storage
-* Open the project of your choice (.Net 6 or .Net Framework) in your code editor (if you are using Visual Studio Code, it is recommended to use .Net 6 Examples)
+* Open the solution (.Net 6) in your code editor of choice
 * Restore nugets and build project
 * You are ready to go.
 
