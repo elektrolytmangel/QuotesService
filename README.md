@@ -2,7 +2,7 @@
 This project contains all information, code and examples to complete the unit-testing day @HxGN, 03/10/2022.
 
 # Prerequisites
-* [.Net 6 / .Net Framework 4.7.2](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks)
+* [.Net 6](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks)
 * Visual Studio 2022 Professional (Paid) or [Visual Studio Code](https://code.visualstudio.com/)
 * Basic knowledge how to write C# code
 * [optional] [Fine Code Coverage](https://marketplace.visualstudio.com/items?itemName=FortuneNgwenya.FineCodeCoverage)
