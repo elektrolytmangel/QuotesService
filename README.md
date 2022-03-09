@@ -14,7 +14,7 @@ This project contains all information, code and examples to complete the unit-te
 * You are ready to go.
 
 # Coverage reports
-To create coverage reports, open powershell in the "QuotesService" directory and execute the lines above.
+To create coverage reports, open powershell in the "QuotesService" directory and execute the lines below.
 ``` ps
 dotnet test --collect:"XPlat Code Coverage"
 
