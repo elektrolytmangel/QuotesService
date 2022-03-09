@@ -34,17 +34,27 @@ namespace QuotesService.UnitTests
                     Content = "That's when you know you found somebody really special. When you just shut the fuck up for a minute and comfortably share silence.",
                     AdditionalInformation = "Pulp Fiction",
                 },
+                new Quote
+                {
+                    Id = Guid.NewGuid(),
+                    Author = "Marvin",
+                    Content = "Man, I don't even have an opinion. ",
+                    AdditionalInformation = "Pulp Fiction",
+                },
             };
 
             // act
             // ToDo: 
             // 1. Execute the action: QuotesHandler.Get with the known id
             // 2. select the single result and assign it to an variable i.e. miaWallaceQuote
+            IList<Quote> selectedQuotes = handler.Get(miasId, allQuotes);
 
             // assert
             // ToDo:
             // 1. Assert that the result of the action is not null
             // 2. Assert that the result of the action has a content which is equal to "That's when you know you found somebody really special. When you just shut the fuck up for a minute and comfortably share silence."
+            Assert.That(selectedQuotes.SingleOrDefault(), Is.Not.Null);
+            Assert.That(selectedQuotes.SingleOrDefault()?.Content, Is.EqualTo("That's when you know you found somebody really special. When you just shut the fuck up for a minute and comfortably share silence."));
 
             // ToDo: Execute the test
         }
