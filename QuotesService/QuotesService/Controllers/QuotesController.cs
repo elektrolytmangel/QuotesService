@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuotesService.BusinessLogicLayer;
 using QuotesService.Model;
+using QuotesService.Persistence;
 
 namespace QuotesService.Controllers
 {
@@ -8,14 +9,35 @@ namespace QuotesService.Controllers
     [Route("[controller]")]
     public class QuotesController : ControllerBase
     {
+        private readonly string favoriteQuotesPath = @"C:\Temp\MyFavoriteQuotes.json";
+        private readonly string famouseQuotesPath = @"C:\Temp\FamouseQuotes.json";
+        private readonly string othersFavoriteQuotesPath = @"C:\Temp\OthersFavoriteQuotes.json";
+
+        private readonly QuotesFileRepository favoriteRepository;
+        private readonly QuotesFileRepository famouseRepository;
+        private readonly QuotesFileRepository othersRepository;
+        private readonly QuotesHandler qutoesHandler;
+
+        public QuotesController() // will be initialized for each request
+        {
+            favoriteRepository = new QuotesFileRepository(favoriteQuotesPath, QuoteType.FAVORITE);
+            famouseRepository = new QuotesFileRepository(famouseQuotesPath, QuoteType.FAMOUSE);
+            othersRepository= new QuotesFileRepository(othersFavoriteQuotesPath, QuoteType.SOMEONE_OTHERS_FAVORITE);
+            qutoesHandler = new QuotesHandler();
+
+        }
+
         [HttpPost]
         public IActionResult Create(Quote quote)
         {
             try
             {
-                quote.Id = Guid.Empty;
-                var handler = new QuotesHandler();
-                var result = handler.AddOrUpdate(quote);
+                quote.Id = Guid.Empty; // ensure there is no id already set
+
+                var allQuotes = this.GetAllQuotes();
+                var result = qutoesHandler.AddOrUpdate(quote, allQuotes);
+                this.WriteQuotes(allQuotes);
+
                 return new OkObjectResult(result);
             }
             catch (Exception)
@@ -30,8 +52,9 @@ namespace QuotesService.Controllers
         {
             try
             {
-                var handler = new QuotesHandler();
-                var result = handler.Get(id);
+                var allQuotes = this.GetAllQuotes();
+                var result = qutoesHandler.Get(id, allQuotes);
+
                 return new OkObjectResult(result);
             }
             catch (Exception)
@@ -45,8 +68,9 @@ namespace QuotesService.Controllers
         {
             try
             {
-                var handler = new QuotesHandler();
-                var result = handler.Get(Guid.Empty);
+                var allQuotes = this.GetAllQuotes();
+                var result = qutoesHandler.Get(Guid.Empty, allQuotes);
+
                 return new OkObjectResult(result);
             }
             catch (Exception)
@@ -61,9 +85,12 @@ namespace QuotesService.Controllers
         {
             try
             {
-                var handler = new QuotesHandler();
                 quote.Id = id;
-                var result = handler.AddOrUpdate(quote);
+
+                var allQuotes = this.GetAllQuotes();
+                var result = qutoesHandler.AddOrUpdate(quote, allQuotes);
+                this.WriteQuotes(allQuotes);
+
                 return new OkObjectResult(result);
             }
             catch (Exception)
@@ -78,14 +105,33 @@ namespace QuotesService.Controllers
         {
             try
             {
-                var handler = new QuotesHandler();
-                var result = handler.DeleteQuote(id);
+                var allQuotes = this.GetAllQuotes();
+                var result = qutoesHandler.DeleteQuote(id, allQuotes);
+                this.WriteQuotes(allQuotes);
+
                 return new OkObjectResult(result);
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+
+        private IList<Quote> GetAllQuotes()
+        {
+            var result = new List<Quote>();
+            result.AddRange(this.favoriteRepository.ReadQuotes());
+            result.AddRange(this.famouseRepository.ReadQuotes());
+            result.AddRange(this.othersRepository.ReadQuotes());
+
+            return result;
+        }
+
+        private void WriteQuotes(IList<Quote> quotes)
+        {
+            this.favoriteRepository.WriteQuotes(quotes);
+            this.famouseRepository.WriteQuotes(quotes);
+            this.othersRepository.WriteQuotes(quotes);
         }
     }
 }
