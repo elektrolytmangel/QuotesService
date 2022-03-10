@@ -9,22 +9,13 @@ namespace QuotesService.Controllers
     [Route("[controller]")]
     public class QuotesController : ControllerBase
     {
-        private readonly string favoriteQuotesPath = @"C:\Temp\MyFavoriteQuotes.json";
-        private readonly string famouseQuotesPath = @"C:\Temp\FamouseQuotes.json";
-        private readonly string othersFavoriteQuotesPath = @"C:\Temp\OthersFavoriteQuotes.json";
-
-        private readonly QuotesFileRepository favoriteRepository;
-        private readonly QuotesFileRepository famouseRepository;
-        private readonly QuotesFileRepository othersRepository;
         private readonly QuotesHandler qutoesHandler;
+        private readonly IEnumerable<QuotesFileRepository> repositories;
 
-        public QuotesController() // will be initialized for each request
+        public QuotesController(QuotesHandler quotesHandler, IEnumerable<QuotesFileRepository> repositories) // will be initialized for each request
         {
-            favoriteRepository = new QuotesFileRepository(favoriteQuotesPath, QuoteType.FAVORITE);
-            famouseRepository = new QuotesFileRepository(famouseQuotesPath, QuoteType.FAMOUSE);
-            othersRepository= new QuotesFileRepository(othersFavoriteQuotesPath, QuoteType.SOMEONE_OTHERS_FAVORITE);
-            qutoesHandler = new QuotesHandler();
-
+            this.qutoesHandler = quotesHandler;
+            this.repositories = repositories;
         }
 
         [HttpPost]
@@ -120,18 +111,20 @@ namespace QuotesService.Controllers
         private IList<Quote> GetAllQuotes()
         {
             var result = new List<Quote>();
-            result.AddRange(this.favoriteRepository.ReadQuotes());
-            result.AddRange(this.famouseRepository.ReadQuotes());
-            result.AddRange(this.othersRepository.ReadQuotes());
+            foreach(var repo in repositories)
+            {
+                result.AddRange(repo.ReadQuotes());
+            }
 
             return result;
         }
 
         private void WriteQuotes(IList<Quote> quotes)
         {
-            this.favoriteRepository.WriteQuotes(quotes);
-            this.famouseRepository.WriteQuotes(quotes);
-            this.othersRepository.WriteQuotes(quotes);
+            foreach (var repo in repositories)
+            {
+                repo.WriteQuotes(quotes);
+            }
         }
     }
 }

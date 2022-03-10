@@ -7,19 +7,13 @@ namespace QuotesService.Controllers
 {
     public class RandomQuotesController : ControllerBase
     {
-        private readonly string favoriteQuotesPath = @"C:\Temp\MyFavoriteQuotes.json";
-        private readonly string famouseQuotesPath = @"C:\Temp\FamouseQuotes.json";
-        private readonly string othersFavoriteQuotesPath = @"C:\Temp\OthersFavoriteQuotes.json";
+        private readonly QuotesRandomizer randomizer;
+        private readonly IEnumerable<QuotesFileRepository> repositories;
 
-        private readonly QuotesFileRepository favoriteRepository;
-        private readonly QuotesFileRepository famouseRepository;
-        private readonly QuotesFileRepository othersRepository;
-
-        public RandomQuotesController()
+        public RandomQuotesController(QuotesRandomizer randomizer, IEnumerable<QuotesFileRepository> repositories)
         {
-            favoriteRepository = new QuotesFileRepository(favoriteQuotesPath, QuoteType.FAVORITE);
-            famouseRepository = new QuotesFileRepository(famouseQuotesPath, QuoteType.FAMOUSE);
-            othersRepository = new QuotesFileRepository(othersFavoriteQuotesPath, QuoteType.SOMEONE_OTHERS_FAVORITE);
+            this.randomizer = randomizer;
+            this.repositories = repositories;
         }
 
         [HttpGet]
@@ -28,9 +22,8 @@ namespace QuotesService.Controllers
         {
             try
             {
-                var randomizer = new QuotesRandomizer();
                 var allQuotes = this.GetAllQuotes();
-                var result = randomizer.SelectRandom(count, allQuotes);
+                var result = this.randomizer.SelectRandom(count, allQuotes);
 
                 return new OkObjectResult(result);
             }
@@ -47,9 +40,10 @@ namespace QuotesService.Controllers
         private IList<Quote> GetAllQuotes()
         {
             var result = new List<Quote>();
-            result.AddRange(this.favoriteRepository.ReadQuotes());
-            result.AddRange(this.famouseRepository.ReadQuotes());
-            result.AddRange(this.othersRepository.ReadQuotes());
+            foreach (var repo in repositories)
+            {
+                result.AddRange(repo.ReadQuotes());
+            }
 
             return result;
         }
