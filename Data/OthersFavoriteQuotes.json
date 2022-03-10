@@ -1,0 +1,142 @@
+[
+  {
+    "Id": "e7de7d4b-f5a3-4988-9e97-14c77a7c426c",
+    "Content": "I love lip sinc!",
+    "Author": "Tom Cruise",
+    "AdditionalInformation": "TV Show",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "33edefe8-195f-48ab-a014-f98223cf505b",
+    "Content": "Das ist alles der Kunstfreiheit gedeckt.",
+    "Author": "Danger Dan",
+    "AdditionalInformation": "Song",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "03b7f26d-48d8-4881-9171-dfb7c8fbd260",
+    "Content": "Huer\u00E4 dammi siech nomau!",
+    "Author": "PVO",
+    "AdditionalInformation": "Work",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "d100a1c1-0f5c-48dd-a3d3-2aeabf878927",
+    "Content": "Mit oder ohni?",
+    "Author": "Any Kepab Seller",
+    "AdditionalInformation": "Food",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "a0a7ecfc-4963-45ba-8f59-d903d2063fa2",
+    "Content": "Muesch di haut eifach h\u00E4b\u00E4.",
+    "Author": "MMU",
+    "AdditionalInformation": "Spare Time",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "2697686a-72c0-46e0-9a02-9cab0d62d48d",
+    "Content": "It is not you, it\u0027s me.",
+    "Author": "Any person breaking up",
+    "AdditionalInformation": "Romantic Movie",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "82573b46-f059-462c-b5af-b306c031b7b6",
+    "Content": "Does he look like a bitch?",
+    "Author": "Jules Winnfield",
+    "AdditionalInformation": "Movie",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "4268ea97-40a0-481d-b773-976a57f0562f",
+    "Content": "Lieber nie als zu sp\u00E4t.",
+    "Author": "Unknown",
+    "AdditionalInformation": "Real Life",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "278b3765-ce03-425c-a28b-e9088f2d39b7",
+    "Content": "No, I\u0027m lying.",
+    "Author": "Butters",
+    "AdditionalInformation": "TV Show",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "97342193-9643-44e4-bad9-240c8c5a5e3d",
+    "Content": "It is hard to fail but it is worse never to have tried to succeed.",
+    "Author": "Theodore Roosevelt",
+    "AdditionalInformation": "Life",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "6dac6c22-1c53-4c44-8f1d-651de43a5459",
+    "Content": "I have not failed. I\u2019ve just found 10,000 ways that won\u2019t work.",
+    "Author": "Thomas A. Edison",
+    "AdditionalInformation": "Life",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "21733220-5ad0-4cde-96e8-dc0dc464b00f",
+    "Content": "The greater damage for most of us is not that our aim is too high and we miss it, but that it it too low and we reach it.",
+    "Author": "Michelangelo",
+    "AdditionalInformation": "Art",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "ff82fca2-3e78-4079-88aa-5d4ebc3ed621",
+    "Content": "You can\u2019t blame gravity for falling in love.",
+    "Author": "Albert Einstein",
+    "AdditionalInformation": "Science",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "aaf271b9-25a4-41ba-88fe-af5157010a28",
+    "Content": "Toto, I\u0027ve got a feeling we\u0027re not in Kansas anymore.",
+    "Author": "Dorothy Gale",
+    "AdditionalInformation": "Movie",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "aae8a6a3-d4dd-4918-9d1a-7d2124645d91",
+    "Content": "May the Force be with you.",
+    "Author": "Han Solo",
+    "AdditionalInformation": "Movie",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "5b0e5c2e-8595-4344-a47d-fe703f7c4412",
+    "Content": "Mama always said life was like a box of chocolates. You never know what you\u0027re gonna get.",
+    "Author": "Forrest Gump",
+    "AdditionalInformation": "Movie",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "2884b7ee-6768-4cd2-ad43-2e0b073e6e7c",
+    "Content": "Oh, and this one time, at band camp...",
+    "Author": "Michelle",
+    "AdditionalInformation": "Movie",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "adda480b-ab6b-4c23-a8b7-2ea4791e530f",
+    "Content": "Bond. James Bond.",
+    "Author": "James Bond",
+    "AdditionalInformation": "Movie",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "143c73c2-1dce-40eb-807f-e025b74a6a5a",
+    "Content": "Das ist doch einfach d\u00E4mlich.",
+    "Author": "KNA",
+    "AdditionalInformation": "Real Life",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  },
+  {
+    "Id": "c54acf19-b6f6-4abb-8acf-e2927835d3da",
+    "Content": "That's when you know you found somebody really special. When you just shut the fuck up for a minute and comfortably share silence.",
+    "Author": "Mia Wallace",
+    "AdditionalInformation": "Pulp Fiction",
+    "Type": "SOMEONE_OTHERS_FAVORITE"
+  }
+]
