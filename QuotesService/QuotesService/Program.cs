@@ -11,20 +11,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<QuotesFileRepository>(s => new QuotesFileRepository(@"C:\Temp\MyFavoriteQuotes.json", QuoteType.FAVORITE));
-builder.Services.AddTransient<QuotesFileRepository>(s => new QuotesFileRepository(@"C:\Temp\FamouseQuotes.json", QuoteType.FAMOUSE));
-builder.Services.AddTransient<QuotesFileRepository>(s => new QuotesFileRepository(@"C:\Temp\OthersFavoriteQuotes.json", QuoteType.SOMEONE_OTHERS_FAVORITE));
+builder.Services.AddTransient<QuotesFileRepository>(s => new QuotesFileRepository(@".\MyFavoriteQuotes.json", QuoteType.FAVORITE));
+builder.Services.AddTransient<QuotesFileRepository>(s => new QuotesFileRepository(@".\FamouseQuotes.json", QuoteType.FAMOUSE));
+builder.Services.AddTransient<QuotesFileRepository>(s => new QuotesFileRepository(@".\Temp\OthersFavoriteQuotes.json", QuoteType.SOMEONE_OTHERS_FAVORITE));
 builder.Services.AddTransient<QuotesHandler>();
 builder.Services.AddTransient<QuotesRandomizer>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

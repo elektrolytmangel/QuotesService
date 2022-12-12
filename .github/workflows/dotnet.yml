@@ -20,5 +20,5 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - run: |
-        docker build ./QuotesService/QuotesService -t hexagonsizur.azurecr.io/quotesservice:${{ github.sha }}
+        docker build . -t hexagonsizur.azurecr.io/quotesservice:${{ github.sha }}
         docker push hexagonsizur.azurecr.io/quotesservice:${{ github.sha }}
