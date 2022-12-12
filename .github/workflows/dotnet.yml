@@ -1,0 +1,24 @@
+name: Deployment to ACR
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: azure/docker-login@v1
+      with:
+        login-server: hexagonsizur.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+    - run: |
+        docker build ./QuotesService/QuotesService -t hexagonsizur.azurecr.io/quotesservice:${{ github.sha }}
+        docker push hexagonsizur.azurecr.io/quotesservice:${{ github.sha }}
