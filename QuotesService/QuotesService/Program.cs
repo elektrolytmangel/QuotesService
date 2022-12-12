@@ -16,6 +16,16 @@ builder.Services.AddTransient<QuotesFileRepository>(s => new QuotesFileRepositor
 builder.Services.AddTransient<QuotesFileRepository>(s => new QuotesFileRepository(@".\Temp\OthersFavoriteQuotes.json", QuoteType.SOMEONE_OTHERS_FAVORITE));
 builder.Services.AddTransient<QuotesHandler>();
 builder.Services.AddTransient<QuotesRandomizer>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "all",
+                      policy =>
+                      {
+                          policy.WithOrigins("*")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                      });
+});
 
 var app = builder.Build();
 
@@ -28,5 +38,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("all");
 
 app.Run();
