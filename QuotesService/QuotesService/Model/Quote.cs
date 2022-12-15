@@ -8,7 +8,7 @@ namespace QuotesService.Model
     {
         [JsonPropertyName("id")]
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         public string Content { get; set; }
 
