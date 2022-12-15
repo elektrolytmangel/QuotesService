@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuotesService.BusinessLogicLayer;
-using QuotesService.Model;
 using QuotesService.Persistence;
 
 namespace QuotesService.Controllers
@@ -8,21 +7,21 @@ namespace QuotesService.Controllers
     public class RandomQuotesController : ControllerBase
     {
         private readonly QuotesRandomizer randomizer;
-        private readonly IEnumerable<QuotesFileRepository> repositories;
+        private readonly QuotesCosmosRepository repository;
 
-        public RandomQuotesController(QuotesRandomizer randomizer, IEnumerable<QuotesFileRepository> repositories)
+        public RandomQuotesController(QuotesRandomizer randomizer, QuotesCosmosRepository repository)
         {
             this.randomizer = randomizer;
-            this.repositories = repositories;
+            this.repository = repository;
         }
 
         [HttpGet]
         [Route("{count}")]
-        public IActionResult RandomQuotes(int count)
+        public async Task<ActionResult> RandomQuotes(int count)
         {
             try
             {
-                var allQuotes = this.GetAllQuotes();
+                var allQuotes = await repository.GetItemsAsync();
                 var result = this.randomizer.SelectRandom(count, allQuotes);
 
                 return new OkObjectResult(result);
@@ -35,17 +34,6 @@ namespace QuotesService.Controllers
             {
                 throw;
             }
-        }
-
-        private IList<Quote> GetAllQuotes()
-        {
-            var result = new List<Quote>();
-            foreach (var repo in repositories)
-            {
-                result.AddRange(repo.ReadQuotes());
-            }
-
-            return result;
         }
     }
 }
