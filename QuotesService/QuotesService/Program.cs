@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 var endpoint = Environment.GetEnvironmentVariable("AZURE_COSMOSDB_ENDPOINT");
 var key = Environment.GetEnvironmentVariable("AZURE_COSMOSDB_KEY");
 var respository = new QuotesCosmosRepository(endpoint, key, "howtoreact", "quotes") ;
-await respository.Initialize();
+_ = respository.InitializeAsync();
 
 builder.Services.AddSingleton(s => respository);
 builder.Services.AddTransient<QuotesHandler>();

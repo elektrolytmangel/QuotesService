@@ -23,7 +23,7 @@ namespace QuotesService.Controllers
         {
             try
             {
-                quote.Id = string.Empty; // ensure there is no id already set
+                quote.Id = Guid.NewGuid().ToString();
                 var result = await repository.CreateItemAsync(quote);
 
                 return new OkObjectResult(result);

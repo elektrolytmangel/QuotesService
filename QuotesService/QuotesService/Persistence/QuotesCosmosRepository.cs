@@ -25,17 +25,25 @@ namespace QuotesService.Persistence
             _containerName = containerName;
         }
 
-        public async Task Initialize()
+        public async Task InitializeAsync()
         {
-            // Create a new instance of the DocumentClient class
-            // to connect to your Cosmos DB database
-            _client = new CosmosClient(_endpoint, _key);
+            try
+            {
+                // Create a new instance of the DocumentClient class
+                // to connect to your Cosmos DB database
+                _client = new CosmosClient(_endpoint, _key);
 
-            // Create a new database if it doesn't exist
-            Database database = await _client.CreateDatabaseIfNotExistsAsync(_databaseName);
+                // Create a new database if it doesn't exist
+                Database database = await _client.CreateDatabaseIfNotExistsAsync(_databaseName);
 
-            // Create a new container if it doesn't exist
-            _container = await database.CreateContainerIfNotExistsAsync(_containerName, "/id");
+                // Create a new container if it doesn't exist
+                _container = await database.CreateContainerIfNotExistsAsync(_containerName, "/id");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+         
         }
 
         public async Task<Quote> CreateItemAsync(Quote item)
