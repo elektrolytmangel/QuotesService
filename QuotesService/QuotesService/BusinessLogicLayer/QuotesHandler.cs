@@ -4,9 +4,9 @@ namespace QuotesService.BusinessLogicLayer
 {
     public class QuotesHandler
     {
-        public IList<Quote> Get(Guid id, IList<Quote> allQuotes)
+        public IList<Quote> Get(string id, IList<Quote> allQuotes)
         {
-            if (id != Guid.Empty)
+            if (!string.IsNullOrEmpty(id))
             {
                 return allQuotes.Where(x => x.Id == id).ToList();
             }
@@ -23,9 +23,9 @@ namespace QuotesService.BusinessLogicLayer
                 throw new ArgumentNullException(nameof(quote));
             }
 
-            if (quote.Id == Guid.Empty)
+            if (string.IsNullOrEmpty(quote.Id))
             {
-                quote.Id = Guid.NewGuid();
+                quote.Id = Guid.NewGuid().ToString();
                 allQuotes.Add(quote);
             }
             else
@@ -39,7 +39,7 @@ namespace QuotesService.BusinessLogicLayer
             return quote;
         }
 
-        public Quote DeleteQuote(Guid id, IList<Quote> allQuotes)
+        public Quote DeleteQuote(string id, IList<Quote> allQuotes)
         {
             var quoteToDelete = allQuotes.SingleOrDefault(q => q.Id == id);
             if (quoteToDelete != null && allQuotes.Remove(quoteToDelete))

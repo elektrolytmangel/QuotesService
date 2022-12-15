@@ -1,5 +1,4 @@
 using QuotesService.BusinessLogicLayer;
-using QuotesService.Model;
 using QuotesService.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,9 +10,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<QuotesFileRepository>(s => new QuotesFileRepository(@".\MyFavoriteQuotes.json", QuoteType.FAVORITE));
-builder.Services.AddTransient<QuotesFileRepository>(s => new QuotesFileRepository(@".\FamouseQuotes.json", QuoteType.FAMOUSE));
-builder.Services.AddTransient<QuotesFileRepository>(s => new QuotesFileRepository(@".\Temp\OthersFavoriteQuotes.json", QuoteType.SOMEONE_OTHERS_FAVORITE));
+var endpoint = Environment.GetEnvironmentVariable("AZURE_COSMOSDB_ENDPOINT");
+var key = Environment.GetEnvironmentVariable("AZURE_COSMOSDB_KEY");
+var respository = new QuotesCosmosRepository(endpoint, key, "howtoreact", "quotes") ;
+await respository.Initialize();
+
+builder.Services.AddSingleton(s => respository);
 builder.Services.AddTransient<QuotesHandler>();
 builder.Services.AddTransient<QuotesRandomizer>();
 builder.Services.AddCors(options =>

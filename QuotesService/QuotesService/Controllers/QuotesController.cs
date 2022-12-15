@@ -10,24 +10,21 @@ namespace QuotesService.Controllers
     public class QuotesController : ControllerBase
     {
         private readonly QuotesHandler qutoesHandler;
-        private readonly IEnumerable<QuotesFileRepository> repositories;
+        private readonly QuotesCosmosRepository repository;
 
-        public QuotesController(QuotesHandler quotesHandler, IEnumerable<QuotesFileRepository> repositories) // will be initialized for each request
+        public QuotesController(QuotesHandler quotesHandler, QuotesCosmosRepository repositories) // will be initialized for each request
         {
             this.qutoesHandler = quotesHandler;
-            this.repositories = repositories;
+            this.repository = repositories;
         }
 
         [HttpPost]
-        public IActionResult Create(Quote quote)
+        public async Task<IActionResult> Create(Quote quote)
         {
             try
             {
-                quote.Id = Guid.Empty; // ensure there is no id already set
-
-                var allQuotes = this.GetAllQuotes();
-                var result = qutoesHandler.AddOrUpdate(quote, allQuotes);
-                this.WriteQuotes(allQuotes);
+                quote.Id = string.Empty; // ensure there is no id already set
+                var result = await repository.CreateItemAsync(quote);
 
                 return new OkObjectResult(result);
             }
@@ -39,13 +36,11 @@ namespace QuotesService.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult Read(Guid id)
+        public async Task<IActionResult> Read(string id)
         {
             try
             {
-                var allQuotes = this.GetAllQuotes();
-                var result = qutoesHandler.Get(id, allQuotes);
-
+                var result = await repository.GetItemAsync(id);
                 return new OkObjectResult(result);
             }
             catch (Exception)
@@ -55,13 +50,11 @@ namespace QuotesService.Controllers
         }
 
         [HttpGet]
-        public IActionResult ReadAll()
+        public async Task<IActionResult> ReadAll()
         {
             try
             {
-                var allQuotes = this.GetAllQuotes();
-                var result = qutoesHandler.Get(Guid.Empty, allQuotes);
-
+                var result = await repository.GetItemsAsync();
                 return new OkObjectResult(result);
             }
             catch (Exception)
@@ -72,16 +65,12 @@ namespace QuotesService.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Update(Guid id, Quote quote)
+        public async Task<IActionResult> Update(string id, Quote quote)
         {
             try
             {
                 quote.Id = id;
-
-                var allQuotes = this.GetAllQuotes();
-                var result = qutoesHandler.AddOrUpdate(quote, allQuotes);
-                this.WriteQuotes(allQuotes);
-
+                var result = await repository.UpdateItemAsync(id, quote);
                 return new OkObjectResult(result);
             }
             catch (Exception)
@@ -92,38 +81,16 @@ namespace QuotesService.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(string id)
         {
             try
             {
-                var allQuotes = this.GetAllQuotes();
-                var result = qutoesHandler.DeleteQuote(id, allQuotes);
-                this.WriteQuotes(allQuotes);
-
-                return new OkObjectResult(result);
+                await repository.DeleteItemAsync(id);
+                return new OkObjectResult(id);
             }
             catch (Exception)
             {
                 throw;
-            }
-        }
-
-        private IList<Quote> GetAllQuotes()
-        {
-            var result = new List<Quote>();
-            foreach(var repo in repositories)
-            {
-                result.AddRange(repo.ReadQuotes());
-            }
-
-            return result;
-        }
-
-        private void WriteQuotes(IList<Quote> quotes)
-        {
-            foreach (var repo in repositories)
-            {
-                repo.WriteQuotes(quotes);
             }
         }
     }

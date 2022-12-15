@@ -1,10 +1,10 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace QuotesService.Model
 {
     public class Quote : IEquatable<Quote>
     {
-        public Quote(Guid id, string content, string author, string additionalInformation)
+        public Quote(string id, string content, string author, string additionalInformation)
         {
             Id = id;
             Content = content;
@@ -12,14 +12,15 @@ namespace QuotesService.Model
             AdditionalInformation = additionalInformation;
         }
 
-        public Quote(Guid id)
+        public Quote(string id)
         {
             this.Id = id;
         }
 
         public Quote() { }
 
-        public Guid Id { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
 
         public string Content { get; set; }
 
